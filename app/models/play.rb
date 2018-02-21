@@ -15,5 +15,11 @@ class Play < ApplicationRecord
   private
 
     def score_word
+      letters = word.upcase.split('')
+      result = letters.map do |letter|
+        letter_scores[letter]
+      end
+      self[:score] = result.sum
     end
+
 end
