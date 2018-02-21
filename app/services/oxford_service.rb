@@ -1,5 +1,5 @@
 class OxfordService
-  attr_reader :word
+  attr_reader :word, :response
 
   def initialize(word)
     @word = word
@@ -15,12 +15,10 @@ class OxfordService
 
   def get_json(url)
     response = conn.get(url)
-    unless response == 404
-      JSON.parse(response.body, symbolize_names: true)
-    end
+      JSON.parse(response.body, symbolize_names: true)[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]
   end
 
   def validation
-    get_json("/api/v1/inflections/en/#{@word}")[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]
+    get_json("/api/v1/inflections/en/#{@word}")
   end
 end
