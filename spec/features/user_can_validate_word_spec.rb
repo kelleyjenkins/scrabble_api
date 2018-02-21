@@ -19,10 +19,3 @@ describe "user validates word" do
     expect(page).to have_content("'foxez' is not a valid word")
   end
 end
-
-
-# As a user
-# When I visit "/"
-# And I fill in a text box with "foxez"
-# And I click "Validate Word"
-# Then I should see a message that says "'foxez' is not a valid word."

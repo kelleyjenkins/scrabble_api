@@ -7,8 +7,10 @@ class ValidateController < ApplicationController
       faraday.headers['app_key'] = ENV["oxford_key"]
       faraday.adapter Faraday.default_adapter
     end
-      response = @conn.get("/api/v1/inflections/en/#{@word}")
-      @result = JSON.parse(response.body, symbolize_names: true)[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]
 
+      @response = @conn.get("/api/v1/inflections/en/#{@word}")
+      unless @response.status == 404
+        @result = JSON.parse(@response.body, symbolize_names: true)[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]
+      end
   end
 end
