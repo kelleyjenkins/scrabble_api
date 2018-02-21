@@ -3,5 +3,6 @@ class PlaySerializer < ActiveModel::Serializer
 
   has_many :users
 
-
+  def user_id
+    object.
 end

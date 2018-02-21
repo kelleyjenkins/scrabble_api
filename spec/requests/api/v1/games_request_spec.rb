@@ -15,6 +15,6 @@ describe "Games API" do
       result = JSON.parse(response.body, symbolize_names: true)
 
       expect(result[:game_id]).to eq(game.id)
-      expect(result[:plays].count).to eq(2)
+      expect(result[:scores].count).to eq(2)
     end
 end
