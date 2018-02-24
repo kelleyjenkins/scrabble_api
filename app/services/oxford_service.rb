@@ -13,12 +13,23 @@ class OxfordService
     end
   end
 
-  def get_json(url)
+  def response(url)
     response = conn.get(url)
+    if response.status == 404
+      return false
+    else
       JSON.parse(response.body, symbolize_names: true)[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]
+    end
   end
 
   def validation
-    get_json("/api/v1/inflections/en/#{@word}")
+    response("/api/v1/inflections/en/#{@word}")
   end
+
+  # def get_json(url)
+  #   response = conn.get(url)
+  #   unless response.status == 404
+  #     JSON.parse(response.body, symbolize_names: true)[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]
+  #   end
+  # end
 end
