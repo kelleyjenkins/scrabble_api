@@ -14,7 +14,9 @@ class Word
   end
 
   def root
-     ValidateService.new(@word).find_root
+     # ValidateService.new(@word).find_root
+     OxfordService.new(@word).validation
+
   end
 
 end
