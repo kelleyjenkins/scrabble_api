@@ -1,7 +1,18 @@
-class Api::V1::PlaysController < ApplicationController
-  attributes :user_id
+class Api::V1::PlaysController < ActionController::API
 
-  def user_id
-    object.where(user_id: 1)
+  def create
+    @play = Play.new(play_params)
+    if @play.save
+      render json: @play
+    else
+      render status: 422
+    end
+  end
+
+  private
+
+  def play_params
+    params.require(:play).permit(:user_id, :game_id, :word, :score)
+
   end
 end
